@@ -3,7 +3,7 @@ package io.github.liyancode.lixiafdservice.app.service;
 import io.github.liyancode.lixiafdservice.api.dto.response.BaseResponseDTO;
 import io.github.liyancode.lixiafdservice.api.dto.response.RespErrorCodeEnum;
 import io.github.liyancode.lixiafdservice.api.dto.response.ResponseStatusEnum;
-import io.github.liyancode.lixiafdservice.infra.persistant.util.SnowflakeIdUtils;
+import io.github.liyancode.lixiafdservice.infra.util.SnowflakeIdUtils;
 
 /**
  * @author liyancode

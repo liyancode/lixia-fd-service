@@ -5,7 +5,6 @@ import io.github.liyancode.lixiafdservice.domain.converter.iprm.PersonConverter;
 import io.github.liyancode.lixiafdservice.domain.module.iprm.PersonDO;
 import io.github.liyancode.lixiafdservice.infra.persistant.mapper.iprm.PersonMapper;
 import io.github.liyancode.lixiafdservice.infra.persistant.object.iprm.PersonPO;
-import io.github.liyancode.lixiafdservice.infra.persistant.util.SnowflakeIdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,20 +24,6 @@ public class PersonRepository {
 
     @Autowired
     PersonConverter personConverter;
-
-    public PersonDO testGetOnePersonByFullName(String fullName) {
-        System.out.println(fullName);
-        PersonPO personPO = personMapper.selectOne(new QueryWrapper<PersonPO>().eq("full_name", fullName));
-        PersonDO personDO = new PersonDO();
-        if (personPO == null) {
-            personDO.setFdPersonId(-1L);
-        } else {
-            personDO.setFdPersonId(personPO.getFdPersonId());
-            personDO = personConverter.convert(personPO);
-        }
-
-        return personDO;
-    }
 
     public boolean insertPerson(PersonDO personDO) {
         PersonPO personPO = personConverter.convert(personDO);

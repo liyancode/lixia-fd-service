@@ -1,4 +1,4 @@
-package io.github.liyancode.lixiafdservice.infra.persistant.util;
+package io.github.liyancode.lixiafdservice.infra.util;
 
 /**
  * @author liyancode
