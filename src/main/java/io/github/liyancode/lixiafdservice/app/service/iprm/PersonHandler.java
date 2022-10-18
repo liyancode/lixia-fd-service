@@ -26,7 +26,7 @@ public class PersonHandler extends BaseHandler {
         BaseResponseDTO<String> resDTO = new BaseResponseDTO<>();
         try {
             if (personRepository.isExist("person_id", personDO.getPersonId())) {
-                resDTO=respBizDataError("personId (" + personDO.getPersonId() + ") already existed.");
+                resDTO = respBizDataError("personId (" + personDO.getPersonId() + ") already existed.");
             } else {
                 personDO.setFdPersonId(snowflakeIdUtils.nextId());
                 if (personRepository.insertPerson(personDO)) {
@@ -45,7 +45,7 @@ public class PersonHandler extends BaseHandler {
         BaseResponseDTO<String> resDTO = new BaseResponseDTO<>();
         try {
             if (personRepository.selectByPersonId(personDO.getPersonId()) == null) {
-                resDTO=respBizDataError("personId (" + personDO.getPersonId() + ") not existed.");
+                resDTO = respBizDataError("personId (" + personDO.getPersonId() + ") not existed.");
             } else {
                 if (personRepository.deletePerson(personDO)) {
                     resDTO.setResults(RespBaseResultsEnum.DELETED.toString());
@@ -63,7 +63,7 @@ public class PersonHandler extends BaseHandler {
         BaseResponseDTO<String> resDTO = new BaseResponseDTO<>();
         try {
             if (personRepository.selectByPersonId(personDO.getPersonId()) == null) {
-                resDTO=respBizDataError("personId (" + personDO.getPersonId() + ") not existed.");
+                resDTO = respBizDataError("personId (" + personDO.getPersonId() + ") not existed.");
             } else {
                 if (personRepository.updatePerson(personDO)) {
                     resDTO.setResults(RespBaseResultsEnum.UPDATED.toString());
@@ -82,12 +82,22 @@ public class PersonHandler extends BaseHandler {
         try {
             if (personId == null || personId.equals("")) {
                 resDTO = respBizDataError("personId must not be null.");
-            }else{
-                PersonDO personDO=personRepository.selectByPersonId(personId);
-                List results=new ArrayList<PersonDO>();
+            } else {
+                PersonDO personDO = personRepository.selectByPersonId(personId);
+                List results = new ArrayList<PersonDO>();
                 results.add(personDO);
                 resDTO.setResults(results);
             }
+        } catch (Exception e) {
+            resDTO = respExceptionCatch(e.toString());
+        }
+        return resDTO;
+    }
+
+    public BaseResponseDTO<List<PersonDO>> handlePersonGetAll() {
+        BaseResponseDTO<List<PersonDO>> resDTO = new BaseResponseDTO();
+        try {
+            resDTO.setResults(personRepository.selectAll());
         } catch (Exception e) {
             resDTO = respExceptionCatch(e.toString());
         }

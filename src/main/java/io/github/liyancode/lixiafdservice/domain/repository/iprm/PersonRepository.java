@@ -77,4 +77,10 @@ public class PersonRepository {
     public boolean isExist(String column, String value) {
         return personMapper.selectOne(new QueryWrapper<PersonPO>().eq(column, value)) != null;
     }
+
+    public List<PersonDO> selectAll() {
+        return personConverter.convert(personMapper.selectList(
+                new QueryWrapper<PersonPO>()
+                        .eq("delete_flag", 0)));
+    }
 }

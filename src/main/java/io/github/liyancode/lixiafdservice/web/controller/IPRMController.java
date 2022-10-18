@@ -35,8 +35,15 @@ public class IPRMController {
         return personHandler.handlePersonUpdate(personDO);
     }
 
+    //single
     @GetMapping("/person")
     public BaseResponseDTO<List<PersonDO>> getPersonById(@RequestParam("personId") String personId) {
         return personHandler.handlePersonGetById(personId);
+    }
+
+    //list
+    @GetMapping("/persons")
+    public BaseResponseDTO<List<PersonDO>> getAllPersons(Integer gender) {
+        return personHandler.handlePersonGetAll();
     }
 }
